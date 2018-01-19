@@ -138,12 +138,16 @@ class S3Deploy {
     if(this.bucketNotifications && this.bucketNotifications.length !== 0) {
 
       this.serverless.cli.log("s3 --> initiate requests ...");
+      this.serverless.cli.log(this.bucketNotifications);
 
       const promises = this.bucketNotifications
         .map( bucketConfiguration => {
           
           const s3Notifications = this.currentBucketNotifications.find( currentNotification => currentNotification.bucket === bucketConfiguration.name );
 
+          this.serverless.cli.log("before -->");
+          this.serverless.cli.log(this.bucketNotifications);
+          
           /*
            * Remove any events that were previously created. No sense in sending them
            *  across again.
@@ -153,6 +157,10 @@ class S3Deploy {
               return !s3Notifications.results.find( s3Event => s3Event.Id === this.s3Facade.getId(event) );
             })
           }
+          
+          this.serverless.cli.log("---------");
+          this.serverless.cli.log(this.bucketNotifications);
+          this.serverless.cli.log("<-- after");
 
 
           return bucketConfiguration;
