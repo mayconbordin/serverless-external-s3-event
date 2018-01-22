@@ -138,7 +138,7 @@ class S3Deploy {
     if(this.bucketNotifications && this.bucketNotifications.length !== 0) {
 
       this.serverless.cli.log("s3 --> initiate requests ...");
-      this.serverless.cli.log(this.bucketNotifications);
+      this.serverless.cli.log(JSON.stringify(this.bucketNotifications));
 
       const promises = this.bucketNotifications
         .map( bucketConfiguration => {
@@ -146,7 +146,7 @@ class S3Deploy {
           const s3Notifications = this.currentBucketNotifications.find( currentNotification => currentNotification.bucket === bucketConfiguration.name );
 
           this.serverless.cli.log("before -->");
-          this.serverless.cli.log(this.bucketNotifications);
+          this.serverless.cli.log(JSON.stringify(this.bucketNotifications));
           
           /*
            * Remove any events that were previously created. No sense in sending them
@@ -159,7 +159,7 @@ class S3Deploy {
           }
           
           this.serverless.cli.log("---------");
-          this.serverless.cli.log(this.bucketNotifications);
+          this.serverless.cli.log(JSON.stringify(this.bucketNotifications));
           this.serverless.cli.log("<-- after");
 
 
