@@ -153,9 +153,9 @@ class S3Deploy {
            *  across again.
            */
           if(s3Notifications && s3Notifications.results.length !== 0) {
-            bucketConfiguration.events = bucketConfiguration.events.filter( event => {
-              return !s3Notifications.results.find( s3Event => s3Event.Id === this.s3Facade.getId(event) );
-            })
+            //bucketConfiguration.events = bucketConfiguration.events.filter( event => {
+            //  return !s3Notifications.results.find( s3Event => s3Event.Id === this.s3Facade.getId(event) );
+            //})
           }
           
           this.serverless.cli.log("---------");
